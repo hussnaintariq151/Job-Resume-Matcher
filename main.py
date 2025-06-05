@@ -10,7 +10,8 @@ from matcher.llm_matcher import unified_job_resume_analyze
 from llm.schemas import MatchRequest, AnalyzeRequest, UnifiedResponse
 from parsers.parser_selector import extract_text
 from llm.inferencer import infer_job_roles, ResumeInput
-from search.job_search import search_jobs, JobSearchInput
+from search.job_search import search_jobs, JobSearchInput, JobSearchError
+
 
 load_dotenv()
 
@@ -104,6 +105,46 @@ async def submit_role(
 
 
 
+
+# @app.get("/jobmatch", response_class=HTMLResponse)
+# async def perform_job_matching(request: Request):
+#     resume_text = user_data.get("resume_text")
+#     selected_role = user_data.get("selected_role")
+
+#     if not resume_text or not selected_role:
+#         return templates.TemplateResponse("error.html", {
+#             "request": request,
+#             "error_message": "Missing resume or role. Please upload again."
+#         })
+
+#     # Search jobs with selected role
+#     search_input = JobSearchInput(query=f"{selected_role} remote", max_results=5)
+#     jobs_found = search_jobs(search_input)
+
+#     if not jobs_found:
+#         return templates.TemplateResponse("error.html", {
+#             "request": request,
+#             "error_message": f"No jobs found for {selected_role}."
+#         })
+
+#     # Analyze top job
+#     top_job = jobs_found[0]
+#     req = MatchRequest(
+#         resume_text=resume_text,
+#         job_description_text=top_job.snippet,
+#         selected_role=selected_role,
+#         max_job_search_results=5
+#     )
+#     result = unified_job_resume_analyze(req)
+
+#     return templates.TemplateResponse("match_results.html", {
+#         "request": request,
+#         "selected_role": selected_role,
+#         "match_result": result.match_result,
+#         "jobs_found": result.jobs_found
+#     })
+
+
 @app.get("/jobmatch", response_class=HTMLResponse)
 async def perform_job_matching(request: Request):
     resume_text = user_data.get("resume_text")
@@ -143,27 +184,56 @@ async def perform_job_matching(request: Request):
     })
 
 
-@app.post("/analyze", response_model=UnifiedResponse)
-async def analyze_endpoint(request: MatchRequest):
-    try:
-        # Convert AnalyzeRequest to your MatchRequest (if needed)
-        match_request = MatchRequest(
-            resume_text=request.resume_text,
-            job_description_text=request.job_description_text,
-            max_job_search_results=request.max_job_search_results,
-            selected_role=request.selected_role if hasattr(request, 'selected_role') else None
+@app.get("/jobsearch", response_class=HTMLResponse)
+async def job_search_from_selected_role(request: Request):
+    selected_role = user_data.get("selected_role")
+
+    if not selected_role:
+        return templates.TemplateResponse(
+            "error.html",
+            {
+                "request": request,
+                "error_message": "No role selected. Please select a role first."
+            }
         )
-        result = unified_job_resume_analyze(match_request)
-        return result
+
+    try:
+        query = f"{selected_role} remote"
+        search_input = JobSearchInput(query=query, max_results=10)
+        job_results = search_jobs(search_input)
+
+        if not job_results:
+            return templates.TemplateResponse(
+                "error.html",
+                {
+                    "request": request,
+                    "error_message": f"No job listings found for role: {selected_role}"
+                }
+            )
+
+        return templates.TemplateResponse(
+            "job_list.html",
+            {
+                "request": request,
+                "selected_role": selected_role,
+                "job_results": job_results
+            }
+        )
+
+    except JobSearchError as e:
+        return templates.TemplateResponse(
+            "error.html",
+            {
+                "request": request,
+                "error_message": f"Job search failed: {str(e)}"
+            }
+        )
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-
-
-
-
-
-
-
-
+        return templates.TemplateResponse(
+            "error.html",
+            {
+                "request": request,
+                "error_message": f"Unexpected error during job search: {str(e)}"
+            }
+        )

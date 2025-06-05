@@ -1,93 +1,202 @@
-{% extends "base.html" %}
-{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Match Results</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
   <style>
     body {
-      background-image: url("https://images.unsplash.com/photo-1531497865144-0464ef8fb9a1?auto=format&fit=crop&w=1950&q=80");
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      font-family: Arial, sans-serif;
-      color: #fff;
-      animation: fadeIn 2s ease-in-out;
-      padding: 2rem;
-    }
-
-    .container {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 2rem;
-      border-radius: 15px;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    h1, h2 {
-      text-align: center;
-    }
-
-    ul {
-      list-style-type: square;
-      padding-left: 20px;
-    }
-
-    .button-container {
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .btn {
-      background-color: #00c4cc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.5s ease;
       color: white;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
+    }
+
+    .glass-card {
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px);
+      color: #ffffff;
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      position: relative;
+    }
+
+    .light-theme {
+      background-color: #f0f0f0 !important;
+      color: #222 !important;
+    }
+
+    .skill-box {
+      background-color: rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s;
+      border: 1.5px solid #17a2b8;
+      border-radius: 12px;
+      padding: 0.7rem;
+      text-align: center;
+      margin-bottom: 0.75rem;
+      color: white;
+    }
+
+    .skill-box:hover {
+      transform: scale(1.05);
+    }
+
+    .skill-box.missing {
+      border-color: #ffc107;
+      color: #ffc107;
+    }
+
+    .suggestion-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-left: 5px solid #17a2b8;
+      border-radius: 10px;
+      max-width: 100%;
+      padding: 1rem 1.5rem;
+      color: white;
+      font-size: 1.1rem;
+      margin: 1rem auto 2rem auto;
+    }
+
+    .progress {
+      background-color: #333;
+      height: 30px;
+      max-width: 300px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      background-color: #28a745;
+      height: 100%;
+      width: 0%;
+      font-size: 1.1rem;
+      line-height: 30px;
+      text-align: center;
+      transition: width 1s ease-in-out;
+      color: white;
+      font-weight: bold;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: 2px solid #17a2b8;
+      border-radius: 0.5rem;
+      padding: 0.3rem 0.8rem;
+      font-size: 1.2rem;
+      color: #17a2b8;
       cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background: #17a2b8;
+      color: #fff;
+    }
+
+    a.explore-btn {
+      display: inline-block;
+      background-color: #17a2b8;
+      color: white;
+      padding: 1rem 3rem;
+      border-radius: 50px;
       text-decoration: none;
-      transition: background-color 0.3s ease;
+      font-size: 1.3rem;
+      font-weight: 600;
+      box-shadow: 0 0 15px #17a2b8;
+      animation: pulse 2s infinite;
+      margin: 0 auto;
+      text-align: center;
+      display: block;
+      max-width: 300px;
     }
 
-    .btn:hover {
-      background-color: #009fa6;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 10px #17a2b8;
+      }
+      50% {
+        box-shadow: 0 0 25px #17a2b8;
+      }
+      100% {
+        box-shadow: 0 0 10px #17a2b8;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🎯 Match Results</h1>
+  <div class="glass-card animate__animated animate__fadeIn">
+    <button class="toggle-btn" onclick="toggleTheme()">🌓 Toggle Theme</button>
 
-    <h2>Match Score: {{ match_result.score }}%</h2>
-
-    <h3>✅ Matched Skills</h3>
-    <ul>
-      {% for skill in match_result.matched_skills %}
-        <li>{{ skill }}</li>
-      {% endfor %}
-    </ul>
-
-    <h3>❌ Missing Skills</h3>
-    <ul>
-      {% for skill in match_result.missing_skills %}
-        <li>{{ skill }}</li>
-      {% endfor %}
-    </ul>
-
-    <h3>💡 Suggestions</h3>
-    <p>{{ match_result.suggestions }}</p>
-
-    <div class="button-container">
-      <a href="/jobsearch" class="btn">🔍 Explore More Jobs</a>
+    <h2 class="text-success">🎯 Skill Score</h2>
+    <div class="progress">
+      <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">0%</div>
     </div>
+
+    <h3 class="text-info mt-4"> Have Skills </h3>
+    <div id="matched-skills" class="d-flex flex-wrap gap-3 mt-2"></div>
+
+    <h3 class="text-warning mt-4"> Havn't skils </h3>
+    <div id="missing-skills" class="d-flex flex-wrap gap-3 mt-2"></div>
+
+    <h3 class="mt-5">💡 Suggestions</h3>
+    <div id="suggestions" class="suggestion-box"></div>
+
+    <a href="/jobsearch" class="explore-btn">🔍 Recommended Jobs</a>
   </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+    }
+
+    // Inject backend data safely
+    const matchResult = {
+      score: {{ match_result.score | tojson }},
+      matched_skills: {{ match_result.matched_skills | tojson }},
+      missing_skills: {{ match_result.missing_skills | tojson }},
+      suggestions: {{ match_result.suggestions | tojson }}
+    };
+
+    // Animate progress bar
+    const progressBar = document.getElementById('progress-bar');
+    setTimeout(() => {
+      progressBar.style.width = matchResult.score + '%';
+      progressBar.setAttribute('aria-valuenow', matchResult.score);
+      progressBar.textContent = matchResult.score + '%';
+    }, 100);
+
+    // Render matched skills
+    const matchedContainer = document.getElementById('matched-skills');
+    matchResult.matched_skills.forEach(skill => {
+      const div = document.createElement('div');
+      div.className = 'skill-box';
+      div.textContent = skill;
+      matchedContainer.appendChild(div);
+    });
+
+    // Render missing skills
+    const missingContainer = document.getElementById('missing-skills');
+    matchResult.missing_skills.forEach(skill => {
+      const div = document.createElement('div');
+      div.className = 'skill-box missing';
+      div.textContent = skill;
+      missingContainer.appendChild(div);
+    });
+
+    // Render suggestions
+    document.getElementById('suggestions').textContent = matchResult.suggestions;
+  </script>
 </body>
 </html>
-{% endblock %}
