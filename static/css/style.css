@@ -1,0 +1,155 @@
+/* Global Styles */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===============================
+ Intro Page Styling
+ =============================== */
+.intro-body {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url('/static/images/bg-jobhunt.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.intro-container {
+  text-align: center;
+  max-width: 700px;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 1.5s ease forwards;
+  opacity: 0;
+}
+
+.main-heading {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.tagline {
+  font-size: 1.3em;
+  margin-bottom: 40px;
+  color: #dcdcdc;
+}
+
+.cta-button {
+  padding: 15px 30px;
+  font-size: 1.1em;
+  background-color: #00c896;
+  color: white;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #00a87c;
+}
+
+/* ===============================
+ Resume Upload Page
+ =============================== */
+.form-body {
+  background: #f9f9f9;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  background: white;
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #444;
+}
+
+input[type="file"],
+select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+button[type="submit"] {
+  margin-top: 30px;
+  padding: 12px 25px;
+  width: 100%;
+  font-size: 1.1em;
+  background-color: #00c896;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #00a87c;
+}
+
+.error-message {
+  color: #ff4c4c;
+  background-color: #ffecec;
+  border: 1px solid #ffcccc;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.loading-text {
+  margin-top: 20px;
+  font-size: 1em;
+  color: #666;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+      transform: translateY(30px);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.fade-in {
+  opacity: 1;
+}

@@ -1,0 +1,16 @@
+pytesseract 
+pdf2image 
+Pillow
+PyMuPDF
+openai 
+python-dotenv
+pydantic
+google-generativeai
+logger
+langchain-community
+duckduckgo-search
+streamlit 
+pdfminer.six
+fastapi
+python-multipart
+uvicorn

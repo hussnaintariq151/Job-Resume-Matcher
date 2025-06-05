@@ -1,0 +1,107 @@
+job-resume-analyzer/
+│
+├── README.md                      # Project overview, how it works, demo
+├── requirements.txt               # Dependencies
+├── .gitignore                     # Ignore cache, .env, __pycache__, etc.
+│
+├── app/                           # 🧠 Core logic and backend modules
+│   ├── __init__.py
+│   ├── parser.py                  # PDF/text parsing (resume, JD)
+│   ├── matcher.py                 # Match score logic & keyword comparison
+│   ├── gpt_suggester.py           # GPT prompts: skill extraction & feedback
+│   ├── utils.py                   # Text cleaning, stopword removal, helpers
+│
+├── ui/                            # 💻 Frontend
+│   ├── __init__.py
+│   ├── streamlit_app.py           # Streamlit app (main entry point)
+│
+├── prompts/                       # 📝 Prompt templates
+│   ├── extract_skills.txt
+│   ├── resume_feedback.txt
+│
+├── data/                          # 📄 Sample files for testing
+│   ├── sample_resume.pdf
+│   ├── sample_job_description.txt
+│
+├── assets/                        # 🎨 Screenshots, thumbnail for README or posts
+│   ├── demo_screenshot.png
+│   ├── match_score_chart.png
+│
+├── tests/                         # ✅ Unit tests for each module
+│   ├── test_parser.py
+│   ├── test_matcher.py
+│   ├── test_gpt_suggester.py
+│
+├── .env                           # 🔐 Your OpenAI key (excluded via .gitignore)
+│
+└── .streamlit/                    # ⚙️ Optional Streamlit settings
+    └── config.toml
+
+
+=====================================================================================
+=====================================================================================
+=====================================================================================
+
++---------------------------------------+
+|             Main App (API)             |
++-----------------+---------------------+
+                  |
+                  v
++---------------------------------------+
+|           Upload Module                |
++-----------------+---------------------+
+                  |
+                  v
++---------------------------------------+
+|           Parser Selector              |
++-----------------+---------------------+
+                  |
+       +----------+-----------+
+       |                      |
+       v                      v
++--------------+      +--------------------+
+| PDF/Text     |      | Scanned PDF parser  |
++--------------+      +--------------------+
+       |                      |
+       +----------+-----------+
+                  |
+                  v
++---------------------------------------+
+|      Text Processing & Extraction     |
++-----------------+---------------------+
+                  |
+                  v
++---------------------------------------+
+|          LLM Role Inference            |
+|  - Input: extracted resume text        |
+|  - Output: candidate suitable roles    |
++-----------------+---------------------+
+                  |
+                  |                  +------------------+
+                  |                  |  Job Search API  |
+                  |                  | (e.g. DuckDuckGo,|
+                  |                  |  SerpAPI, or     |
+                  |                  |  other job APIs) |
+                  |                  +---------+--------+
+                  |                            |
+                  |<-----------search jobs----+
+                  |
+                  v
++---------------------------------------+
+|      Job Description Analyzer +        |
+|           Resume Matcher               |
+| - If user uploads job description      |
+| - Else use jobs found via search       |
++-----------------+---------------------+
+                  |
+                  v
++---------------------------------------+
+|            Result Generator            |
+| - Matching score, job suggestions      |
+| - Skill gap & improvement suggestions  |
++-----------------+---------------------+
+                  |
+                  v
++---------------------------------------+
+|               Frontend (future)        |
++---------------------------------------+

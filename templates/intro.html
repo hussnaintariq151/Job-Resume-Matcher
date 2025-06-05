@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Assistant for Job Hunting</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #e6ecff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background:
+        linear-gradient(rgba(0, 17, 51, 0.75), rgba(0, 17, 51, 0.75)),
+        url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      width: 90vw;
+      max-width: 1200px;
+      text-align: center;
+    }
+
+    .flip-box {
+      background: transparent;
+      width: 650px;
+      height: 250px;
+      margin: 0 auto 50px auto;
+      perspective: 1200px;
+      border-radius: 12px;
+    }
+
+    .flip-box-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .flip-box:hover .flip-box-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-box-front, .flip-box-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px 40px;
+      box-sizing: border-box;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
+
+    .flip-box-front {
+      background-color: #4c65f3a4;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .flip-box-back {
+      background-color: #153e7e;
+      color: #cdd9ff;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      transform: rotateY(180deg);
+      font-weight: 500;
+    }
+
+    .pipeline-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      overflow-x: hidden;
+      flex-wrap: wrap;
+    }
+
+    .pipeline-box {
+      background-color: #1f4a9d;
+      color: #d7e0ff;
+      border-radius: 8px;
+      padding: 25px 20px;
+      flex: 1;
+      min-width: 160px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.7);
+      font-weight: 600;
+      font-size: 1rem;
+      position: relative;
+      animation: slideInFade 1.2s ease-out both;
+      user-select: none;
+      cursor: default;
+      transition: transform 0.3s ease;
+    }
+
+    .pipeline-box:nth-child(2) { animation-delay: 0.2s; }
+    .pipeline-box:nth-child(3) { animation-delay: 0.4s; }
+    .pipeline-box:nth-child(4) { animation-delay: 0.6s; }
+    .pipeline-box:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes slideInFade {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .pipeline-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.85);
+    }
+
+    .btn-get-started {
+      margin-top: 30px;
+      font-size: 1rem;
+      padding: 12px 28px;
+      background-color: #ff4b4b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .btn-get-started:hover {
+      background-color: #d73333;
+    }
+
+    .cta-wrapper {
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .flip-box { width: 90%; }
+      .pipeline-container { flex-direction: column; align-items: center; }
+      .pipeline-box {
+        width: 80%;
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Flip Box -->
+    <div class="flip-box" tabindex="0">
+      <div class="flip-box-inner">
+        <div class="flip-box-front">
+          AI Assistant for Job Hunting
+        </div>
+        <div class="flip-box-back">
+          AI-powered resume analysis — match your resume with job descriptions, get tailored suggestions, and discover roles you’re perfect for, all in just a few steps.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline -->
+    <div class="pipeline-container" aria-label="Project modules and workflow">
+      <div class="pipeline-box" title="Upload Module">Upload Module</div>
+      <div class="pipeline-box" title="Parser Selector">Parser Selector</div>
+      <div class="pipeline-box" title="Text Extraction & Processing">Text Processing & Extraction</div>
+      <div class="pipeline-box" title="LLM Inference">LLM Inference</div>
+      <div class="pipeline-box" title="Job Search">Job Search</div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-wrapper">
+      <a href="/upload-page" class="btn-get-started">Begin Your Journey</a>
+    </div>
+  </div>
+</body>
+</html>

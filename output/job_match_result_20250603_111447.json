@@ -1,0 +1,45 @@
+{
+  "inferred_roles": [
+    "Data Scientist",
+    "Machine Learning Engineer",
+    "Data Analyst",
+    "Quantitative Analyst",
+    "Statistician"
+  ],
+  "jobs_found": [
+    {
+      "title": "Data Scientist Jobs, Employment in Remote - Indeed",
+      "link": "https://www.indeed.com/q-Data-Scientist-l-Remote-jobs.html"
+    },
+    {
+      "title": "Remote Data Science Jobs - Work From Home",
+      "link": "https://remote.co/remote-jobs/data-science"
+    },
+    {
+      "title": "Remote Data Scientist Jobs - We Work Remotely",
+      "link": "https://weworkremotely.com/remote-data-scientist-jobs"
+    },
+    {
+      "title": "1,188 data scientist Jobs in Remote, May 2025 | Glassdoor",
+      "link": "https://www.glassdoor.com/Job/remote-data-scientist-jobs-SRCH_IL.0,6_IS11047_KO7,21.htm"
+    },
+    {
+      "title": "Data Scientist Jobs - Remote Work From Home & Flexible",
+      "link": "https://www.flexjobs.com/remote-jobs/data-scientist"
+    }
+  ],
+  "match_result": {
+    "score": 80,
+    "matched_skills": [
+      "Python",
+      "ML",
+      "statistics",
+      "data visualization",
+      "machine learning",
+      "data engineering",
+      "modeling"
+    ],
+    "missing_skills": [],
+    "suggestions": "Your resume highlights relevant skills for the Data Scientist role. Consider adding specific examples of projects or experiences that demonstrate your expertise in areas like data engineering and modeling. Quantify your achievements to showcase the impact of your work."
+  }
+}

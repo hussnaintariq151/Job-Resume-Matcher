@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Select Your Job Role</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      backdrop-filter: brightness(0.6);
+    }
+
+    .container {
+      background: rgba(202, 183, 183, 0.65);
+      padding: 2.5rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    h1 {
+      margin-bottom: 1.8rem;
+      font-weight: 700;
+      font-size: 1.8rem;
+      text-shadow: 0 0 10px #00e6e6;
+      animation: slideFade 0.8s ease forwards;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem; /* bigger gap between groups */
+      animation: slideFade 1s ease forwards;
+    }
+
+    /* Each form group to separate label+input nicely */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      animation: slideFade 1.1s ease forwards;
+    }
+
+    label {
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      box-shadow: 0 0 8px #00e6e6;
+      background-color: #0c0505;
+      color: white;
+      transition: box-shadow 0.3s ease;
+    }
+
+    select:hover, select:focus,
+    input[type="text"]:hover, input[type="text"]:focus {
+      box-shadow: 0 0 12px #00ffff;
+    }
+
+    button {
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      background: #00e6e6;
+      color: #111;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 0 12px #00e6e6;
+      transition: background-color 0.3s ease;
+      animation: slideFade 1.3s ease forwards;
+    }
+
+    button:hover {
+      background-color: #00b8b8;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideFade {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Select Job Role</h1>
+    <form action="/select-role" method="post">
+      <div class="form-group">
+        <label for="selected_role">Suggested role based on resume</label>
+        <select id="selected_role" name="selected_role" required>
+          {% for role in roles %}
+            <option value="{{ role }}">{{ role }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="custom_role">Or enter a custom role</label>
+        <input type="text" id="custom_role" name="custom_role" placeholder="Type a custom role here" autocomplete="off" />
+      </div>
+
+      <button type="submit">Continue</button>
+    </form>
+  </div>
+</body>
+</html>
