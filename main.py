@@ -104,47 +104,6 @@ async def submit_role(
 
 
 
-
-
-# @app.get("/jobmatch", response_class=HTMLResponse)
-# async def perform_job_matching(request: Request):
-#     resume_text = user_data.get("resume_text")
-#     selected_role = user_data.get("selected_role")
-
-#     if not resume_text or not selected_role:
-#         return templates.TemplateResponse("error.html", {
-#             "request": request,
-#             "error_message": "Missing resume or role. Please upload again."
-#         })
-
-#     # Search jobs with selected role
-#     search_input = JobSearchInput(query=f"{selected_role} remote", max_results=5)
-#     jobs_found = search_jobs(search_input)
-
-#     if not jobs_found:
-#         return templates.TemplateResponse("error.html", {
-#             "request": request,
-#             "error_message": f"No jobs found for {selected_role}."
-#         })
-
-#     # Analyze top job
-#     top_job = jobs_found[0]
-#     req = MatchRequest(
-#         resume_text=resume_text,
-#         job_description_text=top_job.snippet,
-#         selected_role=selected_role,
-#         max_job_search_results=5
-#     )
-#     result = unified_job_resume_analyze(req)
-
-#     return templates.TemplateResponse("match_results.html", {
-#         "request": request,
-#         "selected_role": selected_role,
-#         "match_result": result.match_result,
-#         "jobs_found": result.jobs_found
-#     })
-
-
 @app.get("/jobmatch", response_class=HTMLResponse)
 async def perform_job_matching(request: Request):
     resume_text = user_data.get("resume_text")

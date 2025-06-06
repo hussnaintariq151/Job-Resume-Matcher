@@ -1,4 +1,4 @@
-# app/parsers/parser_selector.py
+
 
 from .pdf_parser import extract_text_from_pdf
 from .scanned_pdf_parser import extract_text_from_scanned_pdf
