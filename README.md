@@ -1,11 +1,12 @@
 
-📄 Job Description Analyzer + Resume Matcher
+📄 AI Assistant for Remote job 
 
-AI-powered app that compares your resume to a job description and provides:
+AI-powered app that compares your upload resume to a job description and provides:
 
     ✅ A matching score (0–100%)
-    🔍 A list of missing keywords/skills
+    🔍 A list of have & haven't skills
     💡 Actionable suggestions to improve your resume
+    💡 Recommend remote job roles
 
 🚀 Why This Project?
 
@@ -19,12 +20,10 @@ Perfect for:
 
 🧠 Features
 
-     📤 Upload a job description (PDF or text)
-     📄 Upload your resume (PDF or text)
+     📤 Upload a Resume (PDF or scanned pdf)
      📊 Get an AI-calculated match score
-
-❗ See missing skills or keywords
-
-✍️ Get AI-generated improvement suggestions
+     📊 Get recommended remote job roles 
+     ❗  See missing skills
+     ✍️ Get AI-generated improvement suggestions
 
 
